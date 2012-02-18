@@ -10,6 +10,7 @@ class GameObject
 
     @image = Surface.new size
     @rect = Rect.new position, size
+
   end
 
 end
