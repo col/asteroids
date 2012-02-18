@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="647e6892-6422-434b-a4ee-7400f77c8083" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bullet.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Col.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Col.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.rb" afterPath="$PROJECT_DIR$/game.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game_object.rb" afterPath="$PROJECT_DIR$/game_object.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player.rb" afterPath="$PROJECT_DIR$/player.rb" />
     </list>
     <ignored path="asteroids.iws" />
@@ -28,28 +32,26 @@
       <file leaf-file-name="game.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="31" selection-start="1565" selection-end="1565" vertical-scroll-proportion="0.0">
+            <state line="25" column="44" selection-start="591" selection-end="591" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game_object.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="game_object.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game_object.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="18" selection-start="205" selection-end="205" vertical-scroll-proportion="0.0">
+            <state line="32" column="22" selection-start="705" selection-end="705" vertical-scroll-proportion="0.2214112">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="player.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="player.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/player.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="50" selection-start="215" selection-end="215" vertical-scroll-proportion="-0.31143552">
-              <folding>
-                <marker date="1329550594000" expanded="true" signature="2603:2642" placeholder="..." />
-              </folding>
+            <state line="68" column="22" selection-start="1720" selection-end="1720" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -57,16 +59,16 @@
       <file leaf-file-name="asteroid.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/asteroid.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="29" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0">
+            <state line="13" column="8" selection-start="308" selection-end="308" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Gemfile">
+      <file leaf-file-name="bullet.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bullet.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="34" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0">
+            <state line="9" column="0" selection-start="153" selection-end="153" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -87,9 +89,10 @@
       <list>
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/asteroid.rb" />
-        <option value="$PROJECT_DIR$/game_object.rb" />
+        <option value="$PROJECT_DIR$/bullet.rb" />
         <option value="$PROJECT_DIR$/game.rb" />
         <option value="$PROJECT_DIR$/player.rb" />
+        <option value="$PROJECT_DIR$/game_object.rb" />
       </list>
     </option>
   </component>
@@ -405,27 +408,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/game.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="31" selection-start="1565" selection-end="1565" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game_object.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="18" selection-start="205" selection-end="205" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/asteroid.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="29" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="34" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0">
@@ -433,12 +415,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bullet.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="153" selection-end="153" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asteroid.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="8" selection-start="308" selection-end="308" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="44" selection-start="591" selection-end="591" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/player.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="50" selection-start="215" selection-end="215" vertical-scroll-proportion="-0.31143552">
-          <folding>
-            <marker date="1329550594000" expanded="true" signature="2603:2642" placeholder="..." />
-          </folding>
+        <state line="68" column="22" selection-start="1720" selection-end="1720" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_object.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="22" selection-start="705" selection-end="705" vertical-scroll-proportion="0.2214112">
+          <folding />
         </state>
       </provider>
     </entry>

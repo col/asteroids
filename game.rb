@@ -39,8 +39,8 @@ class Game
 
     # Create some asteroids
     @asteroids = []
-    @asteroids << Asteroid.new([200,200], [100,100])
-    @asteroids << Asteroid.new([300,300], [60,60])
+    #@asteroids << Asteroid.new([200,200], [100,100])
+    #@asteroids << Asteroid.new([300,300], [60,60])
   end
 
   def run
@@ -72,6 +72,9 @@ class Game
 
     @player.draw @screen
     @asteroids.each do |asteroid|
+      if @player.collide_sprite? asteroid
+        throw :quit
+      end
       asteroid.draw @screen
     end
     @screen.update
