@@ -12,8 +12,6 @@ class GameObject
 
     @image = Surface.new size
     @rect = Rect.new position, size
-
-    @px, @py = position[0], position[1] # Current Position
     @velocity = Ftor.new 0, 0
 
     # Create event hooks in the easiest way.
@@ -31,17 +29,20 @@ class GameObject
   # Update the position based on the velocity and the time since last
   # update.
   def update_pos( dt )
-    @px += @velocity.x * dt
-    @py += @velocity.y * dt
+    x = @rect.centerx
+    y = @rect.centery
+
+    x += @velocity.x * dt
+    y += @velocity.y * dt
 
     # Wrap the screen
     # TODO: use the screen width and height
-    @px = 0 if @px > 640
-    @px = 640 if @px < 0
-    @py = 0 if @py > 480
-    @py = 480 if @py < 0
+    x = 0 if x > 640
+    x = 640 if x < 0
+    y = 0 if y > 480
+    y = 480 if y < 0
 
-    @rect.center = [@px, @py]
+    @rect.center = [x, y]
   end
 
 end

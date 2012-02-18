@@ -1,6 +1,7 @@
 require 'rubygame'
 require 'rubygame/ftor'
 require './game_object'
+require './bullet'
 include Rubygame
 include Rubygame::Events
 include Rubygame::EventActions
@@ -8,8 +9,10 @@ include Rubygame::EventTriggers
 
 class Player < GameObject
 
-  def initialize(position, size)
-    super
+  def initialize(position, game)
+    super(position, [16,16])
+
+    @game = game
 
     # draw the players shape
     @colour = [255, 255, 255]
@@ -60,6 +63,12 @@ class Player < GameObject
 
   # Update the acceleration based on what keys are pressed.
   def update_accel
+
+    if @keys.include?( :space )
+      # FIRE!!!
+      @game.add_bullet Bullet.new @rect.center, @rotation
+    end
+
 
     # Rotation
     @rotation += @rotation_speed if @keys.include?( :left )

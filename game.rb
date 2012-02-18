@@ -33,14 +33,21 @@ class Game
     make_magic_hooks( hooks )
 
     # Create a player
-    @player = Player.new [100,100], [16,16]
-    # Make event hook to pass all events to @ship#handle().
+    @player = Player.new [@screen.width/2,@screen.height/2], self
+    # Make event hook to pass all events to @player#handle().
     make_magic_hooks_for( @player, { YesTrigger.new() => :handle } )
 
     # Create some asteroids
     @asteroids = []
     #@asteroids << Asteroid.new([200,200], [100,100])
     #@asteroids << Asteroid.new([300,300], [60,60])
+
+    @bullets = []
+  end
+
+  def add_bullet(bullet)
+    make_magic_hooks_for( bullet, { YesTrigger.new() => :handle } )
+    @bullets << bullet
   end
 
   def run
@@ -70,13 +77,26 @@ class Game
     # Clear the screen.
     @screen.fill( :black )
 
+    # Draw player
     @player.draw @screen
+
+    # Draw bullets
+    @bullets.dup.each do |bullet|
+      if bullet.alive?
+        bullet.draw @screen
+      else
+        @bullets.delete(bullet)
+      end
+    end
+
+    # Draw asteroids
     @asteroids.each do |asteroid|
       if @player.collide_sprite? asteroid
         throw :quit
       end
       asteroid.draw @screen
     end
+
     @screen.update
   end
 
