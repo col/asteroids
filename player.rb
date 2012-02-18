@@ -18,17 +18,19 @@ class Player < GameObject
     @image.draw_line [8, 0], [16,16], @colour
     @image.draw_line [0, 16], [8,12], @colour
     @image.draw_line [16, 16], [8,12], @colour
+    @orig = @image.clone
 
     @px, @py = position[0], position[1] # Current Position
     @vx, @vy = 0, 0 # Current Velocity
     @ax, @ay = 0, 0 # Current Acceleration
+    @rotation = 0
+    @rotation_speed = 4
 
     @max_speed = 400.0 # Max speed on an axis
-    @accel = 1200.0 # Max Acceleration on an axis
-    @slowdown = 800.0 # Deceleration when not accelerating
+    @accel = 5
+    @deceleration = 0.99
 
     @keys = [] # Keys being pressed
-
 
     # Create event hooks in the easiest way.
     make_magic_hooks(
@@ -62,21 +64,27 @@ class Player < GameObject
     update_pos( dt )
   end
 
+  def degrees_to_radians(degrees)
+
+  end
+
   # Update the acceleration based on what keys are pressed.
   def update_accel
-    x, y = 0,0
 
-    x -= 1 if @keys.include?( :left )
-    x += 1 if @keys.include?( :right )
-    y -= 1 if @keys.include?( :up ) # up is down in screen coordinates
-    y += 1 if @keys.include?( :down )
+    # Rotation
+    @rotation += @rotation_speed if @keys.include?( :left )
+    @rotation -= @rotation_speed if @keys.include?( :right )
+    @image = @orig.rotozoom(@rotation, 1) if @keys.include?( :left ) || @keys.include?( :right )
 
-    # Scale to the acceleration rate. This is a bit unrealistic, since
-    # it doesn't consider magnitude of x and y combined (diagonal).
-    x *= @accel
-    y *= @accel
+    # Acceleration
+    if @keys.include?( :up )
+      radians = @rotation * Math::PI / 180
+      @ax -= Math.sin(radians) * @accel
+      @ay -= Math.cos(radians) * @accel
+    else
+      @ax, @ay = 0, 0
+    end
 
-    @ax, @ay = x, y
   end
 
 
@@ -93,27 +101,18 @@ class Player < GameObject
   #
   # Returns what the new velocity (@vx) should be.
   #
-  def update_vel_axis( v, a, dt )
+  def update_vel_axis( vel, accel, dt )
 
     # Apply slowdown if not accelerating.
-    if a == 0
-      if v > 0
-        v -= @slowdown * dt
-        v = 0 if v < 0
-      elsif v < 0
-        v += @slowdown * dt
-        v = 0 if v > 0
-      end
-    end
+    vel *= @deceleration if accel == 0
 
     # Apply acceleration
-    v += a * dt
+    vel += accel
 
     # Clamp speed so it doesn't go too fast.
-    v = @max_speed if v > @max_speed
-    v = -@max_speed if v < -@max_speed
-
-    return v
+    vel = @max_speed if vel > @max_speed
+    vel = -@max_speed if vel < -@max_speed
+    vel
   end
 
 
@@ -122,6 +121,13 @@ class Player < GameObject
   def update_pos( dt )
     @px += @vx * dt
     @py += @vy * dt
+
+    # Wrap the screen
+    # TODO: use the screen width and height
+    @px = 0 if @px > 640
+    @px = 640 if @px < 0
+    @py = 0 if @py > 480
+    @py = 480 if @py < 0
 
     @rect.center = [@px, @py]
   end
