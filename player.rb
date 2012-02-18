@@ -39,6 +39,7 @@ class Player < GameObject
       KeyReleased => :key_released,
     )
 
+    @time = 0
   end
 
   private
@@ -56,6 +57,7 @@ class Player < GameObject
   # Update the ship state. Called once per frame.
   def update( event )
     dt = event.seconds # Time since last update
+    @time += dt
     update_accel
     update_vel( dt )
     super
@@ -64,11 +66,11 @@ class Player < GameObject
   # Update the acceleration based on what keys are pressed.
   def update_accel
 
-    if @keys.include?( :space )
+    if @keys.include?( :space ) && @time > 0.5
       # FIRE!!!
+      @time = 0
       @game.add_bullet Bullet.new @rect.center, @rotation
     end
-
 
     # Rotation
     @rotation += @rotation_speed if @keys.include?( :left )
