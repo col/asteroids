@@ -1,20 +1,18 @@
 require 'rubygame'
+require './game_object'
 include Rubygame
 
-class Player
+class Player < GameObject
 
-  include Sprites::Sprite
+  def initialize(position, size)
+    super
 
-  def initialize
-    super()
-
-    @image = Surface.new [16, 16]
-    @image.draw_line [8, 0], [0,16], [255, 255, 255]
-    @image.draw_line [8, 0], [16,16], [255, 255, 255]
-    @image.draw_line [0, 16], [8,12], [255, 255, 255]
-    @image.draw_line [16, 16], [8,12], [255, 255, 255]
-
-    @rect = Rect.new [100,100], [16, 16]
+    # draw the players shape
+    @colour = [255, 255, 255]
+    @image.draw_line [8, 0], [0,16], @colour
+    @image.draw_line [8, 0], [16,16], @colour
+    @image.draw_line [0, 16], [8,12], @colour
+    @image.draw_line [16, 16], [8,12], @colour
   end
 
 end
