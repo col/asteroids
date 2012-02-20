@@ -9,8 +9,8 @@ include Rubygame::EventTriggers
 
 class Bullet < GameObject
 
-  def initialize(position, angle)
-    super(position, [2, 2])
+  def initialize(position, angle, game)
+    super(position, [2, 2], game)
 
     # Start a counter to track how long to bullet has been alive for
     @time = 0
@@ -24,12 +24,11 @@ class Bullet < GameObject
     @velocity = Ftor.new_am radians, 600
   end
 
-  def alive?
-    @time < @max_time
-  end
-
   def update( event )
-    @time += event.seconds # Time since last update
+    # track how long the bullet has been alive
+    @time += event.seconds
+    # kill the bullet if its time has come
+    self.kill if @time >= @max_time
     super
   end
 

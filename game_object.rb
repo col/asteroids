@@ -7,12 +7,15 @@ class GameObject
   include Sprites::Sprite
   include EventHandler::HasEventHandler
 
-  def initialize(position, size)
+  def initialize(position, size, game)
     super()
+    @game = game
 
     @image = Surface.new size
+    @image.set_colorkey [0,0,0]
     @rect = Rect.new position, size
     @velocity = Ftor.new 0, 0
+    @colour = [255, 255, 255]
 
     # Create event hooks in the easiest way.
     make_magic_hooks(
@@ -36,11 +39,11 @@ class GameObject
     y += @velocity.y * dt
 
     # Wrap the screen
-    # TODO: use the screen width and height
-    x = 0 if x > 640
-    x = 640 if x < 0
-    y = 0 if y > 480
-    y = 480 if y < 0
+    screen = @game.screen
+    x = 0 if x > screen.w
+    x = screen.w if x < 0
+    y = 0 if y > screen.h
+    y = screen.h if y < 0
 
     @rect.center = [x, y]
   end

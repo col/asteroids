@@ -10,31 +10,30 @@ include Rubygame::EventTriggers
 class Player < GameObject
 
   def initialize(position, game)
-    super(position, [16,16])
+    super(position, [16,16], game)
 
-    @game = game
-
-    # draw the players shape
-    @colour = [255, 255, 255]
+    # Draw the players shape
     @image.draw_line [8, 0], [0,16], @colour
     @image.draw_line [8, 0], [16,16], @colour
     @image.draw_line [0, 16], [8,12], @colour
     @image.draw_line [16, 16], [8,12], @colour
+    # Store the original image so that is can be used to render
+    # rotated versions later
     @orig = @image.clone
 
     @acceleration = Ftor.new 0, 0
     @rotation = 0
-    @rotation_speed = 4
 
-    @max_speed = 400.0    # Max speed on an axis
+    @rotation_speed = 4   # Rotation speed
+    @max_speed = 400.0    # Max speed
     @max_accel = 10       # Max acceleration
     @deceleration = 0.98  # Deceleration rate
+    @fire_rate = 0.25     # Rate of fire
 
     @keys = [] # Keys being pressed
 
-    # Create event hooks in the easiest way.
+    # Create event hooks
     make_magic_hooks(
-      # Send keyboard events to #key_pressed() or #key_released().
       KeyPressed => :key_pressed,
       KeyReleased => :key_released,
     )
@@ -66,16 +65,16 @@ class Player < GameObject
   # Update the acceleration based on what keys are pressed.
   def update_accel
 
-    if @keys.include?( :space ) && @time > 0.5
+    if @keys.include?( :space ) && @time > @fire_rate
       # FIRE!!!
       @time = 0
-      @game.add_bullet Bullet.new @rect.center, @rotation
+      @game.add_bullet Bullet.new @rect.center, @rotation, @game
     end
 
     # Rotation
     @rotation += @rotation_speed if @keys.include?( :left )
     @rotation -= @rotation_speed if @keys.include?( :right )
-    @image = @orig.rotozoom(@rotation, 1) if @keys.include?( :left ) || @keys.include?( :right )
+    @image = @orig.rotozoom(@rotation, 1, true) if @keys.include?( :left ) || @keys.include?( :right )
 
     # Acceleration
     if @keys.include?( :up )
@@ -89,14 +88,15 @@ class Player < GameObject
 
   end
 
-
   # Update the velocity based on the acceleration and the time since
   # last update.
   def update_vel( dt )
-    # Apply the acceleration to the current velocity
+
     if @acceleration.magnitude > 0
+      # Apply the acceleration to the current velocity
       @velocity += @acceleration
     else
+      # Apply the deceleration
       @velocity *= @deceleration
     end
 
