@@ -7,6 +7,7 @@ Install SDL with Homebrew
 
 ```  
 brew install sdl
+brew install sdl_gfx sdl_image sdl_mixer sdl_ttf
 ```
 
 Install the required gems
